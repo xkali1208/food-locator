@@ -46,8 +46,13 @@ export default function SearchPage() {
     if (!amapKey || amapKey === 'your_amap_key') return
 
     async function initMap(key: string) {
-      const AMapLoader = (await import('@amap/amap-jsapi-loader')).default
       const securityKey = process.env.NEXT_PUBLIC_AMAP_SECURITY_KEY
+      // 全局安全配置
+      if (securityKey) {
+        ;(window as any)._AMapSecurityConfig = { securityJsCode: securityKey }
+      }
+
+      const AMapLoader = (await import('@amap/amap-jsapi-loader')).default
       const AMap = await AMapLoader.load({ key, version: '2.0', securityJsCode: securityKey } as any)
 
       if (mapInstance.current) {
