@@ -34,7 +34,7 @@ export default function MapPicker({ onLocationSelect, initialLocation, height = 
     }
 
     import('@amap/amap-jsapi-loader').then((mod) =>
-      mod.default.load({ key, version: '2.0', securityJsCode: securityKey })
+      mod.default.load({ key, version: '2.0', securityJsCode: securityKey } as any)
     ).then((AMap: any) => {
       const map = new AMap.Map(mapRef.current!, {
         zoom: 15,

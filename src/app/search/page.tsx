@@ -48,7 +48,7 @@ export default function SearchPage() {
     async function initMap(key: string) {
       const AMapLoader = (await import('@amap/amap-jsapi-loader')).default
       const securityKey = process.env.NEXT_PUBLIC_AMAP_SECURITY_KEY
-      const AMap = await AMapLoader.load({ key, version: '2.0', securityJsCode: securityKey })
+      const AMap = await AMapLoader.load({ key, version: '2.0', securityJsCode: securityKey } as any)
 
       if (mapInstance.current) {
         mapInstance.current.destroy()
