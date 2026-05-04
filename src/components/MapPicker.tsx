@@ -27,13 +27,14 @@ export default function MapPicker({ onLocationSelect, initialLocation, height = 
     if (!mapRef.current) return
 
     const key = process.env.NEXT_PUBLIC_AMAP_KEY
+    const securityKey = process.env.NEXT_PUBLIC_AMAP_SECURITY_KEY
     if (!key || key === 'your_amap_key') {
       setLoading(false)
       return
     }
 
     import('@amap/amap-jsapi-loader').then((mod) =>
-      mod.default.load({ key, version: '2.0' })
+      mod.default.load({ key, version: '2.0', securityJsCode: securityKey })
     ).then((AMap: any) => {
       const map = new AMap.Map(mapRef.current!, {
         zoom: 15,
